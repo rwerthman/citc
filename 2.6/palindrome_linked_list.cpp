@@ -1,5 +1,6 @@
 #include <string>
 #include <stdio.h>
+#include "gtest/gtest.h"
 
 class Node {
 public:
@@ -111,78 +112,116 @@ void LinkedList::removeNode(int data) {
     }
 }
 
-void assert(int test, std::string msg) {
-    if (test) {
-        printf("PASSED: %s.\n", msg.c_str());
-    } else {
-        printf("FAILED: %s.\n", msg.c_str());
+// void assert(int test, std::string msg) {
+//     if (test) {
+//         printf("PASSED: %s.\n", msg.c_str());
+//     } else {
+//         printf("FAILED: %s.\n", msg.c_str());
+//     }
+// }
+//
+// void testInitialization() {
+//     Node *head = new Node(5);
+//     LinkedList *ll = new LinkedList(head);
+//     assert(ll->getSize() == 1, "Initialization: Linked List has correct size");
+// }
+//
+// void testGetSize() {
+//     Node *head = new Node(5);
+//     LinkedList *ll = new LinkedList(head);
+//     ll->addNode(10);
+//     ll->addNode(12);
+//     assert(ll->getSize() == 3, "GetSize: Linked List has correct size");
+// }
+//
+// void testDoesExist() {
+//     Node *head = new Node(5);
+//     LinkedList *ll = new LinkedList(head);
+//     ll->addNode(10);
+//     ll->addNode(12);
+//     assert(ll->doesExist(10) == true, "DoesExist: Value does exist in linked list");
+//     assert(ll->doesExist(15) == false, "DoesExist: Value does not exist in linked list");
+// }
+//
+// void testIsPalindrome() {
+//     Node *head = new Node(5);
+//     LinkedList *ll = new LinkedList(head);
+//     ll->addNode(10);
+//     ll->addNode(12);
+//     assert(ll->isPalindrome() == false, "IsPalindrome: Linked list is not a palindrome");
+//     ll->addNode(10);
+//     ll->addNode(5);
+//     assert(ll->isPalindrome() == true, "IsPalindrome: Linked list is a palindrome");
+// }
+//
+// void testRemoveNode() {
+//     Node *head = new Node(5);
+//     LinkedList *ll = new LinkedList(head);
+//     ll->addNode(10);
+//     ll->addNode(12);
+//     ll->removeNode(5);
+//     assert(ll->getSize() == 2, "RemoveNode: Linked list is correct size");
+//     assert(ll->head->data == 10, "RemoveNode: head node is correct");
+//
+//     ll->removeNode(12);
+//     assert(ll->getSize() == 1, "RemoveNode: Linked list is correct size");
+//     assert(ll->head->next == nullptr, "RemoveNode: head has correct next node");
+//
+//
+//     Node *head1 = new Node(5);
+//     LinkedList *ll1 = new LinkedList(head1);
+//     ll1->addNode(10);
+//     ll1->addNode(12);
+//     ll1->removeNode(10);
+//     assert(ll1->getSize() == 2, "RemoveNode: Linked list is correct size");
+//     assert(ll1->head->next->data == 12, "RemoveNode: Head node has correct next node");
+//
+// }
+//
+// int main() {
+//     testInitialization();
+//     testGetSize();
+//     testDoesExist();
+//     testIsPalindrome();
+//     testRemoveNode();
+//
+//     return 0;
+// }
+using ::testing::InitGoogleTest;
+
+namespace {
+    TEST(GetSizeTest, CorrectSize) {
+      Node *head = new Node(5);
+      LinkedList *ll = new LinkedList(head);
+      ll->addNode(10);
+      ll->addNode(12);
+      EXPECT_EQ(3, ll->getSize());
+    }
+
+    TEST(RemoveNodeTest, RemoveNode) {
+        Node *head = new Node(5);
+        LinkedList *ll = new LinkedList(head);
+        ll->addNode(10);
+        ll->addNode(12);
+        ll->removeNode(5);
+        EXPECT_EQ(ll->getSize(), 2);
+        EXPECT_EQ(ll->head->data, 10);
+
+        ll->removeNode(12);
+        EXPECT_EQ(ll->getSize(), 1);
+        EXPECT_EQ(ll->head->next, nullptr);
+
+        Node *head1 = new Node(5);
+        LinkedList *ll1 = new LinkedList(head1);
+        ll1->addNode(10);
+        ll1->addNode(12);
+        ll1->removeNode(10);
+        EXPECT_EQ(ll1->getSize(), 2);
+        EXPECT_EQ(ll1->head->next->data, 12);
     }
 }
 
-void testInitialization() {
-    Node *head = new Node(5);
-    LinkedList *ll = new LinkedList(head);
-    assert(ll->getSize() == 1, "Initialization: Linked List has correct size");
-}
-
-void testGetSize() {
-    Node *head = new Node(5);
-    LinkedList *ll = new LinkedList(head);
-    ll->addNode(10);
-    ll->addNode(12);
-    assert(ll->getSize() == 3, "GetSize: Linked List has correct size");
-}
-
-void testDoesExist() {
-    Node *head = new Node(5);
-    LinkedList *ll = new LinkedList(head);
-    ll->addNode(10);
-    ll->addNode(12);
-    assert(ll->doesExist(10) == true, "DoesExist: Value does exist in linked list");
-    assert(ll->doesExist(15) == false, "DoesExist: Value does not exist in linked list");
-}
-
-void testIsPalindrome() {
-    Node *head = new Node(5);
-    LinkedList *ll = new LinkedList(head);
-    ll->addNode(10);
-    ll->addNode(12);
-    assert(ll->isPalindrome() == false, "IsPalindrome: Linked list is not a palindrome");
-    ll->addNode(10);
-    ll->addNode(5);
-    assert(ll->isPalindrome() == true, "IsPalindrome: Linked list is a palindrome");
-}
-
-void testRemoveNode() {
-    Node *head = new Node(5);
-    LinkedList *ll = new LinkedList(head);
-    ll->addNode(10);
-    ll->addNode(12);
-    ll->removeNode(5);
-    assert(ll->getSize() == 2, "RemoveNode: Linked list is correct size");
-    assert(ll->head->data == 10, "RemoveNode: head node is correct");
-
-    ll->removeNode(12);
-    assert(ll->getSize() == 1, "RemoveNode: Linked list is correct size");
-    assert(ll->head->next == nullptr, "RemoveNode: head has correct next node");
-
-
-    Node *head1 = new Node(5);
-    LinkedList *ll1 = new LinkedList(head1);
-    ll1->addNode(10);
-    ll1->addNode(12);
-    ll1->removeNode(10);
-    assert(ll1->getSize() == 2, "RemoveNode: Linked list is correct size");
-    assert(ll1->head->next->data == 12, "RemoveNode: Head node has correct next node");
-
-}
-
-int main() {
-    testInitialization();
-    testGetSize();
-    testDoesExist();
-    testIsPalindrome();
-    testRemoveNode();
-
-    return 0;
+int main(int argc, char **argv) {
+    InitGoogleTest(&argc, argv);
+    RUN_ALL_TESTS();
 }
