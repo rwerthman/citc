@@ -216,7 +216,7 @@ namespace {
         ll1->addNode(10);
         ll1->addNode(12);
         ll1->removeNode(10);
-        EXPECT_EQ(ll1->getSize(), 2);
+        EXPECT_EQ(ll1->getSize(), 2) << "Linked list is not the correct size";
         EXPECT_EQ(ll1->head->next->data, 12);
     }
 }
