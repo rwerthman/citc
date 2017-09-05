@@ -44,15 +44,22 @@ char *compressed_string(char *original_string) {
     }
 }
 
+// Simple testing function to check the code logic
+void assert(int test, std::string msg) {
+    if (!test) {
+        printf("FAILED: %s \n", msg.c_str());
+    } else {
+        printf("PASSED: %s \n", msg.c_str());
+    }
+}
+
 int main() {
     char *original_string = "aab";
     char *new_string = compressed_string(original_string);
-    std::cout << new_string << std::endl;
-    free(new_string);
+    assert(original_string == new_string, "Original string was smaller than compressed string.");
 
     original_string = "aabcccccaaa";
     new_string = compressed_string(original_string);
-    std::cout << new_string << std::endl;
-    free(new_string);
+    assert(strcmp("a2bc5a3", new_string) == 0, "Original string was compressed correctly.");
     return 0;
 }
