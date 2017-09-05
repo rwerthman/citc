@@ -1,3 +1,5 @@
+import unittest
+
 class Node(object):
     def __init__(self, data):
         self.data = data
@@ -75,7 +77,14 @@ def main():
     assertionTest(getSize(head) == 4, 'List is correct size.')
     print listAsString(head)
 
+class TestLinkedListMethods(unittest.TestCase):
 
+    def testGetSize(self):
+        head = Node('r')
+        addNode(head, 'a')
+        addNode(head, 'r')
+        self.assertTrue(isPalindrome(head))
 
 if __name__ == '__main__':
     main()
+    unittest.main()
