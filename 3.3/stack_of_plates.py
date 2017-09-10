@@ -51,10 +51,7 @@ class Stack(object):
 
     def isEmpty(self):
         """ Checks to see if the stack is empty """
-        if self.top is None:
-            return True
-        else:
-            return False
+        return self.top is None
 
     def size(self):
         size = 0
