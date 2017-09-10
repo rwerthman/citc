@@ -7,10 +7,29 @@ class SetOfStacks(object):
         self.threshold = threshold
 
     def push(self, n):
-        pass
+        if self.top.size() >= self.threshold:
+            # Create a new stack
+            new_stack = Stack(n)
+            new_stack.next = self.top
+            self.top = new_stack
+        else:
+            self.top.push(n)
 
     def pop(self):
-        pass
+        if self.top.size() == 1:
+            s = self.top
+            self.top = self.top.next
+            return s.pop()
+        else:
+            self.top.pop()
+
+    def size(self):
+        size = 0
+        s = self.top
+        while s is not None:
+            size += 1
+            s = s.next
+        return size
 
 class Stack(object):
 

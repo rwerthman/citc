@@ -1,6 +1,7 @@
 import unittest
 from stack_of_plates import StackNode
 from stack_of_plates import Stack
+from stack_of_plates import SetOfStacks
 
 
 class TestStackClass(unittest.TestCase):
@@ -53,11 +54,41 @@ class TestStackClass(unittest.TestCase):
 
 class testSetOfStacks(unittest.TestCase):
 
-    def testpush():
-        pass
+    def testpush(self):
+        threshold = 3
+        top = StackNode(10)
+        s = Stack(top)
+        sos = SetOfStacks(s, threshold)
 
-    def testpop():
-        pass
+        top = StackNode(11)
+        sos.push(top)
+        top = StackNode(12)
+        sos.push(top)
+
+        self.assertEqual(sos.size(), 1)
+        top = StackNode(13)
+        sos.push(top)
+        self.assertEqual(s.size(), 3)
+        self.assertEqual(sos.size(), 2)
+
+    def testpop(self):
+        threshold = 3
+        s = Stack(StackNode(10))
+        sos = SetOfStacks(s, threshold)
+        sos.push(StackNode(11))
+        sos.push(StackNode(12))
+        sos.push(StackNode(13))
+        n = sos.pop()
+
+        self.assertEqual(n.data, 13)
+        self.assertEqual(sos.size(), 1)
+
+    def testsize(self):
+        threshold = 3
+        top = StackNode(10)
+        s = Stack(top)
+        sos = SetOfStacks(s, threshold)
+        self.assertTrue(sos.size() == 1)
 
 if __name__ == '__main__':
     unittest.main()
