@@ -18,3 +18,9 @@ int Stack::size() {
     }
     return size;
 }
+
+StackNode *Stack::pop() {
+    StackNode *sn = this->top;
+    this->top = this->top->next;
+    return sn;
+}
