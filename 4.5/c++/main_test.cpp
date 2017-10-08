@@ -11,8 +11,23 @@ namespace {
         BinarySearchTree* bst = new BinarySearchTree(bstn);
 
         bst->insert(new BinarySearchTreeNode(11));
+        bst->insert(new BinarySearchTreeNode(12));
 
-        EXPECT_EQ(bst->size(), 2);
+        EXPECT_EQ(bst->size(), 3);
+    }
+
+    TEST(BinarySeachTreeTest, IsBST) {
+        BinarySearchTreeNode* bstn = new BinarySearchTreeNode(10);
+        BinarySearchTree* bst = new BinarySearchTree(bstn);
+
+        bst->insert(new BinarySearchTreeNode(11));
+        bst->insert(new BinarySearchTreeNode(12));
+
+        ASSERT_TRUE(bst->is_bst());
+
+        bstn->left = new BinarySearchTreeNode(11);
+        ASSERT_FALSE(bst->is_bst());
+        EXPECT_EQ(bst->size(), 4);
     }
 
 }

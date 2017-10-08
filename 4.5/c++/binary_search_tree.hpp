@@ -10,6 +10,7 @@ public:
     BinarySearchTree(BinarySearchTreeNode* root);
     void insert(BinarySearchTreeNode* node);
     int size();
+    bool is_bst();
 };
 
 #endif
