@@ -48,7 +48,30 @@ def size(node):
         return size(node.left) + 1 + size(node.right)
     return 0
 
+def is_bst(node):
+    '''
+    Check if binary tree is a binary search tree.
+    Return True if the tree is a binary search tree.
+    Return False if the tree is not a binary search tree.
 
+    '''
+    node_list = []
+    while node is not None:
+        if node.left is not None:
+            if node.left.data <= node.data:
+                node_list.append(node.left)
+            else:
+                return False
+        if node.right is not None:
+            if node.right.data > node.data:
+                node_list.append(node.right)
+            else:
+                return False
+        if node_list:
+            node = node_list.pop(0)
+        else:
+            node = None
+    return True
 
 class BinarySearchTreeNode(object):
     def __init__(self, data):
