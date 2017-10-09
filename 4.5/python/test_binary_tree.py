@@ -35,14 +35,23 @@ class TestBinarySearchTree(unittest.TestCase):
         bst.insert(8)
         bst.insert(7)
 
-        self.assertEqual(is_bst(bst.root), True)
+        self.assertEqual(is_bst(bst.root, None, None), True)
 
         bstn = BinarySearchTreeNode(10)
         bstn.left = BinarySearchTreeNode(10)
         bstn.left.left = BinarySearchTreeNode(11)
         bstn.right = BinarySearchTreeNode(12)
 
-        self.assertEqual(is_bst(bstn), False)
+        self.assertEqual(is_bst(bstn, None, None), False)
+
+        bstn = BinarySearchTreeNode(20)
+        bstn.left = BinarySearchTreeNode(10)
+        bstn.left.right = BinarySearchTreeNode(25)
+        bstn.right = BinarySearchTreeNode(30)
+
+        self.assertEqual(is_bst(bstn, None, None), False)
+
+
 
 
 if __name__ == '__main__':

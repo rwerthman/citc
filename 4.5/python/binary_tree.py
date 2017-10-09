@@ -48,29 +48,23 @@ def size(node):
         return size(node.left) + 1 + size(node.right)
     return 0
 
-def is_bst(node):
+
+def is_bst(node, min_data, max_data):
     '''
     Check if binary tree is a binary search tree.
     Return True if the tree is a binary search tree.
     Return False if the tree is not a binary search tree.
 
     '''
-    node_list = []
-    while node is not None:
-        if node.left is not None:
-            if node.left.data <= node.data:
-                node_list.append(node.left)
-            else:
-                return False
-        if node.right is not None:
-            if node.right.data > node.data:
-                node_list.append(node.right)
-            else:
-                return False
-        if node_list:
-            node = node_list.pop(0)
-        else:
-            node = None
+    if node is None:
+        return True
+
+    if (min_data != None and node.data <= min_data) or (max_data != None and node.data > max_data):
+        return False
+
+    if not is_bst(node.left, min_data, node.data) or not is_bst(node.right, node.data, max_data):
+        return False
+
     return True
 
 class BinarySearchTreeNode(object):
