@@ -28,5 +28,17 @@ def breadth_first_search(directed_graph):
     return visited_list
 
 
-def route_between_nodes(directed_graph):
-    pass
+def route_between_nodes(directed_graph, node1, node2):
+    visited_list = []
+    marked_list = []
+    queue = []
+    queue.append(node1) # Add the starting node to the queue
+    while queue:
+        node = queue.pop(0)
+        visited_list.append(node)
+        node_adjacency_list = directed_graph[node]
+        for adjacent_node in node_adjacency_list:
+            if adjacent_node not in marked_list:
+                marked_list.append(adjacent_node)
+                queue.append(adjacent_node)
+    return node2 in visited_list
